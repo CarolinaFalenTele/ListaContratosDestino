@@ -282,7 +282,7 @@
                                 >
                                     <Text
                                         id="textId4"
-                                        text="ConditionPurpose"
+                                        text="ConditionPurpose  "
                                     />
                                 </Column>
                             </columns>
