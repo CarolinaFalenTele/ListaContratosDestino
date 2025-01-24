@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" controllerName="wb.wbprodct.controller.AdaptFiltersDialog">
+    <Dialog id="dialogAdaptFilters" title="Adapt Filters">
+        <content>
+            <VBox id="nd">
+                <Label id="grt" text="Seleccione los campos a mostrar:" />
+                
+            </VBox>
+        </content>
+        <beginButton>
+            <Button id="de3" text="Aplicar" press="onApplyFilters" />
+        </beginButton>
+        <endButton>
+            <Button id="nun3" text="Cancelar" press="onCancelFilters" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

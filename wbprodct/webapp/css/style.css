@@ -1,0 +1,30 @@
+/* Enter your custom styles here */
+.successText {
+    color: green;
+}
+
+.warningText {
+    color: yellow;
+}
+
+.errorText {
+    color: red;
+}
+
+.infoText {
+    color: rgb(2, 87, 215);
+}
+.celesteText {
+    color: #1983f4; /* Celeste */
+}
+.whiteBackground {
+    background-color: white; /* Fondo blanco */
+}
+
+.required-label::after {
+    content: " *";
+    color: red;
+    font-weight: bold;
+}
+
+

@@ -1,0 +1,77 @@
+_schema-version: "3.2"
+ID: wbprodapp
+version: 0.0.1
+modules:
+  - name: wbprodapp-approuter
+    type: approuter.nodejs
+    path: wbprodapp-approuter
+    requires:
+      - name: wbprodapp_html_repo_runtime
+      - name: uaa_wbprodapp
+      - name: dest_wbprodapp
+      - name: conn_wbprodapp
+    parameters:
+      disk-quota: 512M
+      memory: 512M
+
+  - name: wbprodapp_ui_deployer
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: wbprodapp_html_repo_host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - wbwbprodct.zip
+          name: wbwbprodct
+          target-path: resources/
+
+  - name: wbwbprodct
+    type: html5
+    path: wbprodct
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+
+resources:
+  - name: wbprodapp_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+
+  - name: uaa_wbprodapp
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-name: wbprodapp-xsuaa-service
+      service-plan: application
+
+  - name: wbprodapp_html_repo_host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: dest_wbprodapp
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+
+  - name: conn_wbprodapp
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+
+parameters:
+  deploy_mode: html5-repo

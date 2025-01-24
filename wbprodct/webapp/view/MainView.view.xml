@@ -1,0 +1,426 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:m="sap.m"
+    xmlns:uxap="sap.uxap"
+    controllerName="wb.wbprodct.controller.MainView"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+>
+    <f:DynamicPage id="no">
+        <f:title>
+            <f:DynamicPageTitle id="nodf">
+                <f:heading>
+                    <Title
+                        id="mid"
+                        text="Lista Contratos"
+                        level="H1"
+                        class="infoText"
+                    />
+                </f:heading>
+                <f:expandedContent>
+                    <Label
+                        id="expandedLabel"
+                        text="Lista completa"
+                    />
+                </f:expandedContent>
+                <f:snappedContent>
+                    <Label
+                        id="snappedLabel"
+                        text="No filters active"
+                    />
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="go">
+                <f:content>
+                    <fb:FilterBar
+                        id="filterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search=".onSearch"
+                        filterChange=".onFilterChange"
+                        afterVariantLoad=".onAfterVariantLoad"
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                id="nur"
+                                name="Name"
+                                label="Company Code"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="inputCompanyCode"
+                                        placeholder="Buscar Company Code"
+                                        width="15rem"
+                                    />
+                                </fb:control>
+
+                                <fb:customData>
+                                    <core:CustomData
+                                        key="class"
+                                        value="required-label"
+                                    />
+                                </fb:customData>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                id="nurqee"
+                                name="A0CIIM_CALMONTH"
+                                label="Mes"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <DatePicker
+                                        id="inputMonth"
+                                        value="{path: '/A0CIIM_CALMONTH'}"
+                                        displayFormat="MM.yyyy"
+                                        valueFormat="yyyy-MM"
+                                        placeholder="Selecciona Mes Año"
+                                        change="onDateChange"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                id="agb"
+                                name="A0CIIM_CALMONTHTo"
+                                label="Mes Fin"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <DatePicker
+                                        id="inputMonthTo"
+                                        value="{path: '/A0CIIM_CALMONTHTo'}"
+                                        displayFormat="MM.yyyy"
+                                        valueFormat="yyyy-MM"
+                                        placeholder="Selecciona Mes Año"
+                                        change="onDateChange"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <!-- Filtros adicionales -->
+                            <fb:FilterGroupItem
+                                id="recontract"
+                                name="A0CISO_RECONTRACT"
+                                label="Recontract"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="inputRecontract"
+                                        value="{path: '/A0CISO_RECONTRACT'}"
+                                        placeholder="Buscar Recontract"
+                                        width="15rem"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                id="recontractTo"
+                                name="A0CISO_RECONTRACTTo"
+                                label="Recontract To"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="inputRecontractTo"
+                                        value="{path: '/A0CISO_RECONTRACTTo'}"
+                                        placeholder="Buscar Recontract To"
+                                        width="15rem"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                id="contrType"
+                                name="A0CISO_CONTRTYPE"
+                                label="Contract Type"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="inputContrType"
+                                        value="{path: '/A0CISO_CONTRTYPE'}"
+                                        placeholder="Buscar Contract Type"
+                                        width="15rem"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                id="contrTypeTo"
+                                name="A0CISO_CONTRTYPETo"
+                                label="Contract Type To"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="inputContrTypeTo"
+                                        value="{path: '/A0CISO_CONTRTYPETo'}"
+                                        placeholder="Buscar Contract Type To"
+                                        width="15rem"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                id="recdType"
+                                name="A0CISO_RECDTYPE"
+                                label="Record Type"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="inputRecdType"
+                                        value="{path: '/A0CISO_RECDTYPE'}"
+                                        placeholder="Buscar Record Type"
+                                        width="15rem"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                id="recdTypeTo"
+                                name="A0CISO_RECDTYPETo"
+                                label="Record Type To"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="inputRecdTypeTo"
+                                        value="{path: '/A0CISO_RECDTYPETo'}"
+                                        placeholder="Buscar Record Type To"
+                                        width="15rem"
+                                    />
+                                </fb:control>
+                                
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <IconTabBar
+                id="iconTabBar"
+                class="sapUiResponsiveContentPadding"
+            >
+                <items>
+                    <IconTabFilter
+                        id="tab1"
+                        text="Contratos Tabla"
+                    >
+                        <Table
+                            id="table"
+                            inset="false"
+                            items="{ path: '/ZPIFA(A0CIIM_CALMONTH=\'12.2024\',A0CIIM_CALMONTHTo=\'12.2024\',A0CISO_RECONTRACT=\'\',A0CISO_RECONTRACTTo=\'\',A0CISO_CONTRTYPE=\'\',A0CISO_CONTRTYPETo=\'\',A0CISO_RECDTYPE=\'\',A0CISO_RECDTYPETo=\'\',ZVAR_M_COMP_CODE=\'\')/Results' }"
+                        >
+                            <columns>
+                                <Column
+                                    id="columnId1"
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                >
+                                    <Text
+                                        id="textId1"
+                                        text="ID"
+                                    />
+                                </Column>
+                                <Column
+                                    id="columnId2"
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                >
+                                    <Text
+                                        id="textId2"
+                                        text="Contract"
+                                    />
+                                </Column>
+                                      <Column
+                                    id="columnId23"
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                >
+                                    <Text
+                                        id="textId23"
+                                        text="ConditionType"
+                                    />
+                                </Column>
+                                <Column
+                                    id="columnId3"
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                >
+                                    <Text
+                                        id="textId3"
+                                        text="RealEstateObject"
+                                    />
+                                </Column>
+                                <Column
+                                    id="columnId4"
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                >
+                                    <Text
+                                        id="textId4"
+                                        text="ConditionPurpose"
+                                    />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <ColumnListItem
+                                    id="columnListItem1"
+                                    vAlign="Middle"
+                                >
+                                    <cells>
+                                        <ObjectIdentifier
+                                            id="objId1"
+                                            title="{A0COMP_CODE}"
+                                        />
+                                         <Text
+                                            id="text12"
+                                            text="{A0RECONTRACT}"
+                                        />
+                                        <Text
+                                            id="text1"
+                                            text="{ZRE_CCTYP}"
+                                        />
+                                        <Text
+                                            id="text2"
+                                            text="{A0REOBJECT_T}"
+                                        />
+                                        <Text
+                                            id="text3"
+                                            text="{A0CONDPURP_T}"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        id="tab2"
+                        text="Contratos List"
+                    >
+                       
+          <List id="productList"  selectionChange="onSelectionChange" class="sapUiResponsiveMargin whiteBackground" width="auto" 
+          items="{ path: '/ZPIFA(A0CIIM_CALMONTH=\'12.2024\',A0CIIM_CALMONTHTo=\'12.2024\',A0CISO_RECONTRACT=\'\',A0CISO_RECONTRACTTo=\'\',A0CISO_CONTRTYPE=\'\',A0CISO_CONTRTYPETo=\'\',A0CISO_RECDTYPE=\'\',A0CISO_RECDTYPETo=\'\',ZVAR_M_COMP_CODE=\'\')/Results' }">
+                 
+                        <items>
+                            <ObjectListItem id="n2" title="{A0COMP_CODE}" number="{A0RECONTRACT}" numberUnit="Contract" type="Active">
+                                <!-- Custom attributes for additional fields -->
+                                <attributes>
+                                    <ObjectAttribute id="n3" text="ID: {A0COMP_CODE}" class=".successText" />
+                                    <ObjectAttribute id="n4" text="Contract: {A0RECONTRACT}" class="warningText"/>
+                                    <ObjectAttribute id="n5" text="RealEstateObject: {A0REOBJECT_T}" class="celesteText"/>
+                                    <ObjectAttribute id="n6" text="ConditionPurpose: {A0CONDPURP_T}"/>
+                                    <ObjectAttribute id="n7" text="ConditionType: {ZRE_CCTYP}"/>
+                                </attributes>
+                            </ObjectListItem>
+                        </items>
+                    </List>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        id="tab3"
+                        text="Notes"
+                    >
+                      
+     <viz:VizFrame
+        id="idVizFrame"
+        uiConfig="{applicationSet:'fiori'}"
+        vizType="bar"
+        width="100%"
+        height="400px">
+
+        <!-- Dataset (definir las dimensiones y medidas) -->
+        <viz:dataset>
+            <viz.data:FlattenedDataset
+                id="idFlattenedDataset"
+                data="{/ZPIFA(A0CIIM_CALMONTH='12.2024',A0CIIM_CALMONTHTo='12.2024',A0CISO_RECONTRACT='',A0CISO_RECONTRACTTo='',A0CISO_CONTRTYPE='',A0CISO_CONTRTYPETo='',A0CISO_RECDTYPE='',A0CISO_RECDTYPETo='',ZVAR_M_COMP_CODE='')/Results}">
+                
+                <viz.data:dimensions>
+                    <!-- Definir dimensiones, que son los atributos categóricos -->
+                    <viz.data:DimensionDefinition
+                        id="dimensionContract"
+                        name="Contract"
+                        value="{A0COMP_CODE}" />
+                    <viz.data:DimensionDefinition
+                        id="dimensionRealEstateObject"
+                        name="RealEstateObject"
+                        value="{A0REOBJECT_T}" />
+                    <viz.data:DimensionDefinition
+                        id="dimensionConditionPurpose"
+                        name="ConditionPurpose"
+                        value="{A0CONDPURP_T}" />
+                </viz.data:dimensions>
+                
+                <viz.data:measures>
+                    <!-- Definir medidas (valores numéricos) -->
+                    <viz.data:MeasureDefinition
+                        id="measureConditionType"
+                        name="ConditionType"
+                        value="{A0RECONTRACT}" />
+                </viz.data:measures>
+            </viz.data:FlattenedDataset>
+        </viz:dataset>
+
+        <!-- Feeds (conexión de datos al gráfico) -->
+        <viz:feeds>
+            <viz.feeds:FeedItem
+                id="idFeedDimensionContract"
+                uid="categoryAxis"
+                type="Dimension"
+                values="Contract" />
+            <viz.feeds:FeedItem
+                id="idFeedDimensionRealEstateObject"
+                uid="categoryAxis"
+                type="Dimension"
+                values="RealEstateObject" />
+            <viz.feeds:FeedItem
+                id="idFeedDimensionConditionPurpose"
+                uid="categoryAxis"
+                type="Dimension"
+                values="ConditionPurpose" />
+            <viz.feeds:FeedItem
+                id="idFeedMeasureConditionType"
+                uid="valueAxis"
+                type="Measure"
+                values="ConditionType" />
+        </viz:feeds>
+
+    </viz:VizFrame>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        id="tab4"
+                        text="People"
+                    >
+                        <Text
+                            id="name3"
+                            text="People content goes here ..."
+                        />
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
